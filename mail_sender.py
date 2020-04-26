@@ -56,7 +56,6 @@ class MailSenderCls(object):
 	def send_mail(self, rx_body, rx_message):
 		""" Receiving messages to send via e-mail"""
 		with self._lock:
-			print('testing mail')
 			self.mail_interrupt = True
 			self.mail_body = rx_body
 			self.mail_message = rx_message
