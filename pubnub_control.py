@@ -14,7 +14,7 @@ mail_sender_cls = MailSenderCls()
 class MySubscribeCallbackClass(SubscribeCallback):
 
     def presence(self, pubnub, presence):
-        self.control_presence(presence.uuid, presence.event, presence.timetoken)
+        control_presence(presence.uuid, presence.event, presence.timetoken)
 
     def message(self, pubnub, message):
         pass  # handle incoming messages
@@ -24,14 +24,6 @@ class MySubscribeCallbackClass(SubscribeCallback):
 
     def control_message(self):
         pass
-
-    def control_presence(self, userID, userAction, date_time):
-        if(userID == 'Raspberry-pi'):
-            if(userAction == "leave"):
-                mail_sender_cls.send_mail('Raspberry Pi', 'Disconnected')
-            elif(userAction == 'join'):
-                mail_sender_cls.send_mail('Raspberry Pi', 'Connected')
-            return
 
 class PubNubControlClass(object):  
 
@@ -45,8 +37,6 @@ class PubNubControlClass(object):
         self.pubnub = PubNub(self.pnconfig)
         self.pubnubChannel = 'web-control'
 
-        self._lock = threading.Lock()
-
         # Initializing and starting threads
         self.subscribe_thread = Thread(target=self.subscribe_method)
         self.subscribe_thread.setDaemon(True)
@@ -54,9 +44,18 @@ class PubNubControlClass(object):
 
 
     def subscribe_method(self):
-        with self._lock:
-            self.pubnub.add_listener(MySubscribeCallbackClass())        
-            self.pubnub.subscribe().channels(self.pubnubChannel).with_presence().execute()
+        self.pubnub.add_listener(MySubscribeCallbackClass())        
+        self.pubnub.subscribe().channels(self.pubnubChannel).with_presence().execute()
 
     def unsubscribe_method(self):
-        self.pubnub.unsubscribe().channels(self.pubnubChannel).execute()       
+        self.pubnub.unsubscribe().channels(self.pubnubChannel).execute()   
+
+def control_presence(userID, userAction, date_time):
+        if(userID == 'Raspberry-pi'):
+            if(userAction == "leave"):
+                print('sending')
+                mail_sender_cls.send_mail('Raspberry Pi', 'Disconnected')
+            elif(userAction == 'join'):
+                mail_sender_cls.send_mail('Raspberry Pi', 'Connected')
+                print('sending 2')
+            return    
