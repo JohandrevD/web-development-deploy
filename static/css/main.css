@@ -1,0 +1,265 @@
+@import url('https://fonts.googleapis.com/css2?family=Cabin&family=Herr+Von+Muellerhoff&family=Source+Sans+Pro&display=swap');
+
+*,
+*::before,
+*::after{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root{
+    --main-font: 'Source Sans Pro', sans-serif;
+    --secondary-font: 'Herr Von Muellerhoff', cursive;
+    --body-font: 'Cabin', sans-serif;
+    --main-font-color-dark: #252525;
+    --secondary-font-color: #c59d5f;
+    --body-font-color: #515151;
+}
+
+html{
+    font-family: var(--body-font);
+    font-size: 10px;
+    color: var(--body-font);
+    scroll-behavior: smooth;
+    /* background-color: rgba(0, 0, 255, 0.313); */
+}
+
+body{
+    overflow-x: hidden;
+}
+
+section{
+    padding: 4rem 0;
+}
+
+img{
+    width: 100%;
+    max-width: 100%;
+}
+
+a{
+    text-decoration: none;
+}
+
+p{
+    font-size: 1.6rem;
+}
+
+.container{
+    width: 100%;
+    max-width: 122.5rem;
+    margin: 0 auto;
+    padding: 0 2.4rem;
+} 
+
+/* Hero */
+.hero{
+    width: 100%;
+    height: 90vh;
+    background: url("../images/Wood-Background-Blue.jpg") center no-repeat;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+.sub-headline{
+    font-size: 8rem;
+    font-family: var(--secondary-font);
+    color: var(--secondary-font-color);
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: 2px;
+    text-shadow: 3px 3px 4px #000;
+    opacity: 0;
+    animation: fadeUp .5s forwards;
+    animation-delay: .5s;
+}
+
+.first-letter{
+    text-transform: uppercase;
+    font-size: 10rem;
+}
+
+.headline{
+    color: #fff;
+    font-size: 1.8rem;
+    font-family: var(--main-font);
+    text-transform: uppercase;
+    font-weight: 900;
+    letter-spacing: .5rem;
+    margin-right: -.5rem;
+    opacity: 0;
+    animation: scale .5s forwards;
+}
+
+.seperator{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.line{
+    width: 100%;
+    max-width: 8.4rem;
+    height: .25rem;
+    background-color: #fff;
+    position: relative;
+    opacity: 0;
+    animation: grow 2s forwards;
+    animation-delay: .9s;
+}
+
+.line-right::before,
+.line-left::before{
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    border: .6rem solid transparent;
+    opacity: 0;
+    animation: grow .5s forwards;
+    animation-delay: 1.2s;
+}
+
+.line-right::before{
+    border-right-color: #fff;
+    right: 0;
+}
+
+.line-left::before{
+    border-left-color: #fff;
+    left: 0;
+}
+
+.asterisk{
+    font-size: 1.4rem;
+    color: var(--secondary-font-color);
+    margin: 0 1.6rem;
+    opacity: 0;
+    animation: spin 1s forwards;
+    animation-delay: .7s;
+}
+
+.headline-description h5{
+    color: #fff;
+    font-size: 1.3rem;
+    font-weight: 100;
+    text-transform: uppercase;
+    margin-bottom: 1.2rem;
+    letter-spacing: 3px;
+    margin-right: -3px;    
+}
+
+.txt-type{
+    border-right: 1px solid #fff;
+}
+
+.single-animation{
+    opacity: 0;
+    animation: fadeDown .5s forwards;
+    animation-delay: 1.5s;
+}
+
+.btn{
+    display: inline-block;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-right: -2px;
+    font-weight: bold;
+}
+
+.cta-btn{
+    font-size: 1.1rem;
+    background-color: #fff;
+    padding: .9rem 1.8rem;
+    color: var(--body-font-color);
+    border-radius: .4rem;
+    transition: background-color .5s;
+}
+
+.cta-btn:hover,
+.cta-btn:focus{
+    color: #fff;
+    background-color: transparent;
+    border: 2px solid var(--secondary-font-color);
+}
+
+@media screen and (min-width: 800px){
+    section{
+        padding: 7.9rem;
+    }
+
+    .hero{
+        height: 100vh;
+    }
+
+    .sub-headline{
+        font-size: 12rem;
+    }
+
+    .first-letter{
+        font-size: 14.2rem;
+    }
+
+    .headline{
+        font-size: 3.7rem;
+        letter-spacing: .8rem;
+    }
+
+    .line{
+        max-width: 11.4rem;
+    }
+}
+
+/* Animations */
+@keyframes fadeUp{
+    0%{
+        transform: translateY(4rem);
+    }
+    100%{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes scale{
+    0%{
+        transform: scale(2);
+    }
+    100%{
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes grow{
+    0%{
+        width: 0;
+    }
+    100%{
+        opacity: 1;
+        width: 100%;
+    }
+}
+
+@keyframes spin{
+    0%{
+        transform: rotate(0);
+    }
+    100%{
+        opacity: 1;
+        transform: rotate(-360deg)
+    }
+}
+
+@keyframes fadeDown{
+    0%{
+        transform: translateY(-1rem);
+    }
+    100%{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
