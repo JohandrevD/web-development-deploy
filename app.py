@@ -4,10 +4,10 @@ from flask import Flask
 from time import sleep
 
 # from pubnub_control import PubNubControlClass
-from mail_sender import MailSenderCls
+# from mail_sender import MailSenderCls
 
 # pubnub_control_class = PubNubControlClass()
-mail_sender_cls = MailSenderCls()
+# mail_sender_cls = MailSenderCls()
 
 app = Flask(__name__)
 
@@ -16,7 +16,7 @@ app = Flask(__name__)
 def index():
     """ Default route page  """
 
-    mail_sender_cls.send_mail('Testing', 'Testing')
+    # mail_sender_cls.send_mail('Testing', 'Testing')
 
     return 'Hello'
 
