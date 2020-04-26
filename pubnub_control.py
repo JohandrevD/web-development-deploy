@@ -55,7 +55,7 @@ def control_presence(userID, userAction, date_time):
         if(userID == 'Raspberry-pi'):
             if(userAction == "leave"):
                 print('sending')
-                # mail_sender_cls.send_mail('Raspberry Pi', 'Disconnected')
+                mail_sender_cls.send_mail('Raspberry Pi', 'Disconnected')
             elif(userAction == 'join'):
-                # mail_sender_cls.send_mail('Raspberry Pi', 'Connected')
+                mail_sender_cls.send_mail('Raspberry Pi', 'Connected')
                 print('sending 2')    
