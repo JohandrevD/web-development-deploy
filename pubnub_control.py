@@ -47,6 +47,8 @@ class PubNubControlClass(object):
         self.pubnub = PubNub(self.pnconfig)
         self.pubnubChannel = 'web-control'
 
+        print('Testing')
+
         # Initializing and starting threads
         self.subscribe_thread = Thread(target=self.subscribe_method)
         self.subscribe_thread.setDaemon(True)

@@ -5,6 +5,8 @@ from time import sleep
 
 from pubnub_control import PubNubControlClass
 
+pubnub_control_class = PubNubControlClass()
+
 app = Flask(__name__)
 
 
@@ -15,9 +17,7 @@ def index():
     return 'Hello'
 
 
-if __name__ == "__main__":
-
-    pubnub_control_class = PubNubControlClass()
+if __name__ == "__main__":    
 
     while True:
         print('Testing')
