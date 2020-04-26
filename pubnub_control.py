@@ -15,6 +15,7 @@ class MySubscribeCallbackClass(SubscribeCallback):
 
     def presence(self, pubnub, presence):
         control_presence(presence.uuid, presence.event, presence.timetoken)
+        print(presence.event)
 
     def message(self, pubnub, message):
         pass  # handle incoming messages
@@ -54,8 +55,7 @@ def control_presence(userID, userAction, date_time):
         if(userID == 'Raspberry-pi'):
             if(userAction == "leave"):
                 print('sending')
-                mail_sender_cls.send_mail('Raspberry Pi', 'Disconnected')
+                # mail_sender_cls.send_mail('Raspberry Pi', 'Disconnected')
             elif(userAction == 'join'):
-                mail_sender_cls.send_mail('Raspberry Pi', 'Connected')
-                print('sending 2')
-            return    
+                # mail_sender_cls.send_mail('Raspberry Pi', 'Connected')
+                print('sending 2')    
