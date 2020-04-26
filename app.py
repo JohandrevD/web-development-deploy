@@ -16,12 +16,12 @@ app = Flask(__name__)
 def index():
     """ Default route page  """
 
+    mail_sender_cls.send_mail('Testing', 'Testing')
+
     return 'Hello'
 
 
 if __name__ == "__main__":
-
-    mail_sender_cls.send_mail('Testing', 'Testing')
 
     while True:
         print('Testing')
