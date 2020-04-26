@@ -28,7 +28,7 @@ mail_sender_cls = MailSenderCls()
 
 class PubNubControlClass(object): 
 
-    mail_sender_cls.send_mail('Testing', 'Testing') 
+    mail_sender_cls.send_mail('Testing', 'Testings') 
 
 #     def __init__(self):
 #         self.pnconfig = PNConfiguration()
