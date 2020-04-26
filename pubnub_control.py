@@ -7,9 +7,9 @@ from pubnub.pubnub import PubNub
 
 from threading import Lock, Thread
 
-from mail_sender import MailSenderCls
+# from mail_sender import MailSenderCls
 
-mail_sender_cls = MailSenderCls()
+# mail_sender_cls = MailSenderCls()
 
 # class MySubscribeCallbackClass(SubscribeCallback):
 
