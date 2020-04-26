@@ -7,24 +7,56 @@ from pubnub.pubnub import PubNub
 
 from threading import Lock, Thread
 
+from mail_sender import MailSenderCls
 
-class PubNubControlClass(object):
+mail_sender_cls = MailSenderCls()
 
-    pnconfig = PNConfiguration()
+class MySubscribeCallbackClass(SubscribeCallback):
 
-    pnconfig.subscribe_key = 'sub-c-3e28b73e-8348-11ea-881d-66486515f06e'
-    pnconfig.publish_key = 'pub-c-723918b5-9e0d-4820-a277-3dda21d465cb'
-    pnconfig.uuid = "Website-python"
+    def presence(self, pubnub, presence):
+        self.control_presence(presence.uuid, presence.event, presence.timetoken)
 
-    pubnub = PubNub(pnconfig)
+    def message(self, pubnub, message):
+        pass  # handle incoming messages
+
+    def signal(self, pubnub, signal):
+        pass # handle incoming signals
+
+    def control_message(self):
+        pass
+
+    def control_presence(self, userID, userAction, date_time):
+        if(userID == 'Raspberry-pi'):
+            if(userAction == "leave"):
+                mail_sender_cls.send_mail('Raspberry Pi', 'Disconnected')
+            elif(userAction == 'join'):
+                mail_sender_cls.send_mail('Raspberry Pi', 'Connected')
+            return
+
+class PubNubControlClass(object):  
 
     def __init__(self):
+        self.pnconfig = PNConfiguration()
+
+        self.pnconfig.subscribe_key = 'sub-c-3e28b73e-8348-11ea-881d-66486515f06e'
+        self.pnconfig.publish_key = 'pub-c-723918b5-9e0d-4820-a277-3dda21d465cb'
+        self.pnconfig.uuid = "Website-Python"
+
+        self.pubnub = PubNub(self.pnconfig)
+        self.pubnubChannel = 'web-control'
+
         self._lock = threading.Lock()
 
         # Initializing and starting threads
-        self.subscribe_thread = Thread(target=self.mail_flag)
+        self.subscribe_thread = Thread(target=self.subscribe_method)
         self.subscribe_thread.setDaemon(True)
         self.subscribe_thread.start()
 
-    def mail_flag(self):
-        pass
+
+    def subscribe_method(self):
+        with self._lock:
+            self.pubnub.add_listener(MySubscribeCallbackClass())        
+            self.pubnub.subscribe().channels(self.pubnubChannel).with_presence().execute()
+
+    def unsubscribe_method(self):
+        self.pubnub.unsubscribe().channels(self.pubnubChannel).execute()       
