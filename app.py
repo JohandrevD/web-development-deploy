@@ -3,10 +3,10 @@ import atexit
 from flask import Flask
 from time import sleep
 
-# from pubnub_control import PubNubControlClass
+from pubnub_control import PubNubControlClass
 # from mail_sender import MailSenderCls
 
-# pubnub_control_class = PubNubControlClass()
+pubnub_control_class = PubNubControlClass()
 # mail_sender_cls = MailSenderCls()
 
 app = Flask(__name__)
