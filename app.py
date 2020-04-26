@@ -1,6 +1,6 @@
 import atexit
 
-from flask import Flask
+from flask import Flask, render_template
 from time import sleep
 
 from pubnub_control import PubNubControlClass
@@ -14,7 +14,7 @@ app = Flask(__name__)
 def index():
     """ Default route page  """
 
-    return 'Hello'
+    return render_template('index.html')
 
 
 if __name__ == "__main__":    
