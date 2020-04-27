@@ -10,7 +10,34 @@ const pubnub = new PubNub({
     keepAlive: true
 });
 
+document.addEventListener('DOMContentLoaded', function(){
+    pubnub.subscribe({
+        channels: [theChannel],
+        withPresence: true
+    });
+    console.log('Subscribed');
+});
+
 document.addEventListener('DOMContentLoaded', check_pi());
+
+function listen(){
+    pubnub.addListener({
+        message: function(m) {
+            controlMessages(m.message);
+        },
+        presence: function(p) {
+            // console.log('Presence')
+        }
+    });
+};
+
+function controlMessages(msg){
+    console.log(msg);
+};
+
+function controlPresence(p){  
+    // console.log(p);
+};
 
 function check_pi(){
     console.log('test')
@@ -25,19 +52,22 @@ function check_pi(){
             for(let val in connected_channel){
                 users.push(connected_channel[val].uuid)
             }
-            // console.log(users.includes('Raspberry_Pi'));
             if(!users.includes('Raspberry_Pi')){
                 window.location = window.location.href.split('/iot')[0];
             }
-            //     window.location.href = window.location.href.split('/')[0] + 'iot';
-            // }
-            // else{
-            //     // alert('Controller is not running');
-            //     // window.location.href = window.location.href.split('/')[0] + 'index';
-            //     console.log(window.location.href);
-            //     // document.querySelector('h5').innerHTML = 'Controller is not running';
-            //     // document.getElementById('enter-btn').innerHTML = 'No access';
-            // }              
+            else{
+                var PassWord = prompt("Please enter the password:")
+
+                if(PassWord == null || PassWord == ''){
+                    PassWord = prompt("Please enter valid text:")
+                }
+                else{
+                    pubnub.publish({
+                        message: PassWord,
+                        channel: theChannel
+                    });
+                }
+            }          
         }
     );
 };
