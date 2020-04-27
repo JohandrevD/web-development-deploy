@@ -56,8 +56,8 @@ function init(){
 // ----- Typewriter code ends here ----- //
 
 // ----- PubNub control starts here ----- //
-const clientUUID = 'Website-Index-HTML';
-const theChannel = 'web-control';
+const clientUUID = 'Website_Index_HTML';
+const theChannel = 'Web_Control';
 
 const pubnub = new PubNub({
     publishKey: 'pub-c-723918b5-9e0d-4820-a277-3dda21d465cb',
@@ -104,12 +104,12 @@ function check_pi(){
             includeUUIDs: true
         },
         function (status, response) {
-            var connected_channel = response.channels['web-control']['occupants'];
+            var connected_channel = response.channels['Web_Control']['occupants'];
             var users = [];
             for(let val in connected_channel){
                 users.push(connected_channel[val].uuid)
             }
-            if(users.includes('Raspberry-pi')){
+            if(users.includes('Raspberry_Pi')){
                 window.location.href = window.location.href.split('/')[0] + 'iot';
             }
             else{

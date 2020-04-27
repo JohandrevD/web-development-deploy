@@ -26,7 +26,7 @@ class MySubscribeCallbackClass(SubscribeCallback):
         pass
 
     def control_presence(self, userID, userAction, date_time):
-        if(userID == 'Raspberry-pi'):
+        if(userID == 'Raspberry_Pi'):
             if(userAction == "leave"):
                 mail_sender_cls.send_mail('Raspberry Pi', 'Disconnected')
             elif(userAction == 'join'):
@@ -39,10 +39,10 @@ class PubNubControlClass(object):
 
         self.pnconfig.subscribe_key = 'sub-c-3e28b73e-8348-11ea-881d-66486515f06e'
         self.pnconfig.publish_key = 'pub-c-723918b5-9e0d-4820-a277-3dda21d465cb'
-        self.pnconfig.uuid = "Website-Python"
+        self.pnconfig.uuid = "Website_Main_Python"
 
         self.pubnub = PubNub(self.pnconfig)
-        self.pubnubChannel = 'web-control'
+        self.pubnubChannel = 'Web_Control'
 
         # Initializing and starting threads
         self.subscribe_thread = Thread(target=self.subscribe_method)
