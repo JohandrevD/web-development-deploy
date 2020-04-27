@@ -73,7 +73,7 @@ function listen(){
             // console.log('Message')
         },
         presence: function(p) {
-            console.log(p)
+            controlPresence(p)
         }
     });
 };
@@ -83,7 +83,11 @@ function controlMessages(msg){
 };
 
 function controlPresence(p){  
-    // console.log(p);
+    if(p.uuid == 'Raspberry_Pi' && p.action == 'join'){
+        alert('Controller is now online');
+                document.querySelector('h5').innerHTML = 'Ready to control';
+                document.getElementById('enter-btn').innerHTML = 'Enter';
+    }
 };
 
 
