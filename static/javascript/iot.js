@@ -27,7 +27,7 @@ function check_pi(){
             }
             // console.log(users.includes('Raspberry_Pi'));
             if(!users.includes('Raspberry_Pi')){
-                window.location.href.split('/iot')[0];
+                console.log(window.location.href.split('/iot')[0]);
             }
             //     window.location.href = window.location.href.split('/')[0] + 'iot';
             // }
