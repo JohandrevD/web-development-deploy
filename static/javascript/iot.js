@@ -28,7 +28,7 @@ function listen(){
             controlMessages(m);
         },
         presence: function(p) {
-            // console.log('Presence')
+            controlPresence(p)
         }
     });
 };
@@ -46,11 +46,13 @@ function controlMessages(msg){
 };
 
 function controlPresence(p){  
-    // console.log(p);
+    if(p.uuid == 'Raspberry_Pi' && p.action == 'leave'){
+        alert('Controller is now offline');
+        window.location = window.location.href.split('/iot')[0];
+    }
 };
 
 function check_pi(){
-    console.log('test')
     pubnub.hereNow(
         {
             channels: [theChannel], 

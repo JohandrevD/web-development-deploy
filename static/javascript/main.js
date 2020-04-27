@@ -96,7 +96,28 @@ document.addEventListener('DOMContentLoaded', function(){
         channels: [theChannel],
         withPresence: true
     });
-    console.log('Subscribed');
+    
+    pubnub.hereNow(
+        {
+            channels: [theChannel], 
+            includeUUIDs: true
+        },
+        function (status, response) {
+            var connected_channel = response.channels['Web_Control']['occupants'];
+            var users = [];
+            for(let val in connected_channel){
+                users.push(connected_channel[val].uuid)
+            }
+            if(users.includes('Raspberry_Pi')){
+                window.location.href = window.location.href.split('/')[0] + 'iot';
+            }
+            else{
+                alert('Controller is not running');
+                document.querySelector('h5').innerHTML = 'Controller is not running';
+                document.getElementById('enter-btn').innerHTML = 'No access';
+            }              
+        }
+    );
 });
 
 document.addEventListener('DOMContentLoaded', listen());
