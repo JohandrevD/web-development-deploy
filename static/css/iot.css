@@ -141,7 +141,8 @@ a{
     grid-area: date-wrapper;
     display: flex;
     justify-content: center;
-    align-items: center;font-size: 3rem;
+    align-items: center;
+    font-size: 2rem;
     font-weight: 700;
     text-shadow: 0 0 1rem rgba(0, 200, 255, 1);
 }
@@ -150,7 +151,8 @@ a{
     grid-area: time-wrapper;
     display: flex;
     justify-content: center;
-    align-items: center;font-size: 3rem;
+    align-items: center;
+    font-size: 2rem;
     font-weight: 700;
     text-shadow: 0 0 1rem rgba(0, 200, 255, 1);
 }
