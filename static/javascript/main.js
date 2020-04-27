@@ -108,10 +108,7 @@ document.addEventListener('DOMContentLoaded', function(){
             for(let val in connected_channel){
                 users.push(connected_channel[val].uuid)
             }
-            if(users.includes('Raspberry_Pi')){
-                window.location.href = window.location.href.split('/')[0] + 'iot';
-            }
-            else{
+            if(!users.includes('Raspberry_Pi')){
                 alert('Controller is not running');
                 document.querySelector('h5').innerHTML = 'Controller is not running';
                 document.getElementById('enter-btn').innerHTML = 'No access';
