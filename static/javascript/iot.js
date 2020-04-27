@@ -120,3 +120,14 @@ function check_pi(){
         }
     );
 };
+
+function arm_checkbox(){
+    var arm_disarm_checkbox = document.getElementById('armed-button')
+
+    if(arm_disarm_checkbox.checked == true){
+        pubnub.publish({message: 'Armed', channel: theChannel});
+    }
+    else{
+        pubnub.publish({message: 'Disarmed', channel: theChannel});
+    }
+}
