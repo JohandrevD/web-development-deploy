@@ -38,6 +38,10 @@ function controlMessages(msg){
         if(msg.message == 'Access'){
             document.querySelector('body').style.visibility = 'visible';
         }
+        if(msg.m == 'No Access'){
+            alert('Incorrect password!');
+            window.location = window.location.href.split('/iot')[0];
+        }
     }
 };
 
