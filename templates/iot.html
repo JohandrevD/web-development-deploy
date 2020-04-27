@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         
         <!-- Font Awesome  -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+        <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 
 		<!-- Your own stylesheet -->
 		<link rel="stylesheet" type="text/css" href="../static/css/iot.css">
@@ -31,19 +31,33 @@
         <div class="wrapper">
             <nav class="nav-wrapper">
                 <div class="logo">
-                    <a href="/"><img src="../static/images/android-chrome-192x192.png" alt=""></a>
+                    <!-- <a href="/"><img src="../static/images/android-chrome-192x192.png" alt=""></a> -->
+                </div>
+                <div class="heading">                   
+                    IoT Controller
                 </div>
                 <div class="exit-icon">
                     <a href="/">Exit<i class="fas fa-times"></i></a>
                 </div>
             </nav>
             <div class="main-wrapper">              
-                <div class="main-info">
-                    <div class="date-wrapper" id="date_display">Date</div>
-                    <div class="time-wrapper" id="time_display">Time</div>
+                <div class="main-info">                    
+                    <div class="date-wrapper">
+                        <i class="far fa-calendar-alt"></i>
+                        <div class="date" id="date_display">Date</div></div>
+                    <div class="time-wrapper">
+                        <i class="far fa-clock"></i>
+                        <div class="time" id="time_display">Time</div>
+                    </div>
                 </div>
                 <div class="alarm-wrapper">
-                    <div class="armed-status">Armed</div>
+                    <div class="armed-status">
+                        <div class="armed-status-label">Alarm:</div>
+                        <div class="armed-status-button">
+                            <input type="checkbox" id="armed-button">  
+                            <label for="armed-button" class="armed-button-label"></label>  
+                        </div>    
+                    </div>
                     <div class="main-status">Status</div>
                     <div class="zone-status">Zone</div>
                 </div>
