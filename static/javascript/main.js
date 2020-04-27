@@ -73,7 +73,7 @@ function listen(){
             // console.log('Message')
         },
         presence: function(p) {
-            // console.log('Presence')
+            console.log(p)
         }
     });
 };
