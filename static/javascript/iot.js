@@ -34,7 +34,11 @@ function listen(){
 };
 
 function controlMessages(msg){
-    console.log(msg);
+    if(msg.publisher == 'Raspberry_Pi'){
+        if(msg.message == 'Access'){
+            document.querySelector('body').style.visibility = 'visible';
+        }
+    }
 };
 
 function controlPresence(p){  
