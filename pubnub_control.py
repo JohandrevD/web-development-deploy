@@ -22,14 +22,15 @@ class MySubscribeCallbackClass(SubscribeCallback):
     def signal(self, pubnub, signal):
         pass # handle incoming signals
 
-    def control_message(self):
-        if msg.publisher == 'Website_IoT_HTML':
-			if msg.message == 'Jvd77655':
-				pubnub.publish().channel("Web_Control").message('Access').sync()
-                mail_sender_cls.send_mail('IoT', 'Access Granted')
-			else:
-				pubnub.publish().channel("Web_Control").message('No Access').sync()
-                mail_sender_cls.send_mail('IoT', 'Someone tried to access the page')
+    def control_message(self, msg):
+        print(msg)
+        # if msg.publisher == 'Website_IoT_HTML':
+		# 	if msg.message == 'Jvd77655':
+		# 		pubnub.publish().channel("Web_Control").message('Access').sync()
+        #         mail_sender_cls.send_mail('IoT', 'Access Granted')
+		# 	else:
+		# 		pubnub.publish().channel("Web_Control").message('No Access').sync()
+        #         mail_sender_cls.send_mail('IoT', 'Someone tried to access the page')
 
     def control_presence(self, userID, userAction, date_time):
         if(userID == 'Raspberry_Pi'):
