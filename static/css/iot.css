@@ -90,7 +90,7 @@ a{
     color: white;
     font-family: var(--body-font);
     font-size: 2rem;
-    font-weight: bold;   
+    /* font-weight: bold;    */
     cursor: pointer; 
     padding: 0 1rem;
 }
@@ -122,14 +122,37 @@ a{
 }
 
 .main-info{
-    background-color: rgba(0, 0, 0, .5);
+    background-color: rgba(255, 255, 255, .3);
+    color: black;
     grid-area: main-info;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 1fr ;
+    grid-template-rows: 1fr 1fr;
+    gap: 1rem;
+    grid-template-areas: 
+        "date-wrapper"
+        "time-wrapper";
     border: 1px solid rgba(0, 200, 255, 1);
     border-radius: 2rem;
     box-shadow: 0 0 1rem rgba(0, 200, 255, 1);
+}
+
+.date-wrapper{
+    grid-area: date-wrapper;
+    display: flex;
+    justify-content: center;
+    align-items: center;font-size: 3rem;
+    font-weight: 700;
+    text-shadow: 0 0 1rem rgba(0, 200, 255, 1);
+}
+
+.time-wrapper{
+    grid-area: time-wrapper;
+    display: flex;
+    justify-content: center;
+    align-items: center;font-size: 3rem;
+    font-weight: 700;
+    text-shadow: 0 0 1rem rgba(0, 200, 255, 1);
 }
 
 /* Alarm section wrapper */
@@ -147,7 +170,8 @@ a{
 }
 
 .armed-status{
-    background-color: rgba(0, 0, 0, .5);
+    background-color: rgba(255, 255, 255, .3);
+    color: black;
     grid-area: armed-status;
     display: flex;
     justify-content: center;
@@ -158,7 +182,8 @@ a{
 }
 
 .main-status{
-    background-color: rgba(0, 0, 0, .5);
+    background-color: rgba(255, 255, 255, .3);
+    color: black;
     grid-area: main-status;
     display: flex;
     justify-content: center;
@@ -169,7 +194,8 @@ a{
 }
 
 .zone-status{
-    background-color: rgba(0, 0, 0, .5);
+    background-color: rgba(255, 255, 255, .3);
+    color: black;
     grid-area: zone-status;
     display: flex;
     justify-content: center;
@@ -193,7 +219,8 @@ a{
 }
 
 .tv-led{
-    background-color: rgba(0, 0, 0, .5);
+    background-color: rgba(255, 255, 255, .3);
+    color: black;
     grid-area: tv-led;
     display: flex;
     justify-content: center;
@@ -204,7 +231,8 @@ a{
 }
 
 .lamp-led{
-    background-color: rgba(0, 0, 0, .5);
+    background-color: rgba(255, 255, 255, .3);
+    color: black;
     grid-area: lamp-led;
     display: flex;
     justify-content: center;
@@ -244,6 +272,26 @@ footer{
 
     .main-info{
         grid-area: main-info;
+        display: grid;
+        grid-template-columns: 1fr 1fr ;
+        grid-template-rows: 1fr;
+        gap: 1rem;
+        grid-template-areas: 
+            "date-wrapper time-wrapper";
+        border: 1px solid rgba(0, 200, 255, 1);
+        border-radius: 2rem;
+        box-shadow: 0 0 1rem rgba(0, 200, 255, 1);
+    }
+
+    .date-wrapper{
+        grid-area: date-wrapper;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .time-wrapper{
+        grid-area: time-wrapper;
         display: flex;
         justify-content: center;
         align-items: center;
