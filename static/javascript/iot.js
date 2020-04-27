@@ -25,8 +25,10 @@ function check_pi(){
             for(let val in connected_channel){
                 users.push(connected_channel[val].uuid)
             }
-            console.log(users.includes('Raspberry_Pi'));
-            // if(users.includes('Raspberry_Pi')){
+            // console.log(users.includes('Raspberry_Pi'));
+            if(!users.includes('Raspberry_Pi')){
+                console.log('Not connected')
+            }
             //     window.location.href = window.location.href.split('/')[0] + 'iot';
             // }
             // else{
