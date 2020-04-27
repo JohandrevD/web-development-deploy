@@ -112,7 +112,8 @@ function check_pi(){
                 }
                 else{
                     pubnub.publish({
-                        message: PassWord,
+                        message: {
+                            'password': PassWord},
                         channel: theChannel
                     });
                 }
@@ -125,9 +126,9 @@ function arm_checkbox(){
     var arm_disarm_checkbox = document.getElementById('armed-button')
 
     if(arm_disarm_checkbox.checked == true){
-        pubnub.publish({message: 'Armed', channel: theChannel});
+        pubnub.publish({message: {alarm: 'Armed'}, channel: theChannel});
     }
     else{
-        pubnub.publish({message: 'Disarmed', channel: theChannel});
+        pubnub.publish({message: {alarm: 'Disarmed'}, channel: theChannel});
     }
 }
