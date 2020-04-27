@@ -1,0 +1,314 @@
+@import url('https://fonts.googleapis.com/css2?family=Cabin&family=Herr+Von+Muellerhoff&family=Source+Sans+Pro&display=swap');
+
+*,
+*::before,
+*::after{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root{
+    --main-font: 'Source Sans Pro', sans-serif;
+    --secondary-font: 'Herr Von Muellerhoff', cursive;
+    --body-font: 'Cabin', sans-serif;
+    --main-font-color-dark: #252525;
+    --secondary-font-color: #c59d5f;
+    --body-font-color: #fff;
+}
+
+html{      
+    font-family: var(--body-font);
+    font-size: 10px;
+    color: var(--body-font-color);
+    scroll-behavior: smooth;
+    height: 90vh;
+}
+
+body{
+    background: url("../images/iot_backround.jpg") center no-repeat;
+    background-size: cover;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+a{
+    text-decoration: none;
+}
+
+/* Body wrapper */
+.wrapper{    
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: minmax(5.5rem, 5.5rem) 1fr minmax(4rem, 4rem);
+    /* gap: 1rem; */
+    grid-template-areas: 
+        "nav-wrapper"
+        "main-wrapper"
+        "footer";
+}
+
+/* Navigation */
+.nav-wrapper{
+    grid-area: nav-wrapper;
+    padding: 0 1rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    /* gap: 0 1rem; */
+    grid-template-areas: 
+        "logo exit-icon";
+}
+
+.logo{
+    grid-area: logo;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    padding-left: 1rem;
+}
+
+.logo img{
+    width: 3rem;
+}
+
+.exit-icon{
+    grid-area: exit-icon;
+    display: flex;
+    justify-self: end;
+    align-items: center;
+    padding-right: 1rem;
+}
+
+.exit-icon a{
+    color: white;
+    font-family: var(--body-font);
+    font-size: 2rem;
+    font-weight: bold;   
+    cursor: pointer; 
+    padding: 0 1rem;
+}
+
+.exit-icon a:hover{
+    color: var(--secondary-font-color);
+    background-color: transparent;
+    border: 2px solid var(--secondary-font-color);
+    border-radius: 2rem;
+}
+
+.exit-icon i{
+    padding-left: 1rem;
+}
+
+/* Main section wrapper */
+.main-wrapper{
+    grid-area: main-wrapper;
+    padding: 0 1rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 3fr 2fr;
+    gap: 1rem;
+    padding-bottom: 1rem;
+    grid-template-areas: 
+        "main-info"
+        "alarm-wrapper"
+        "lights-wrapper";
+}
+
+.main-info{
+    background-color: rgba(0, 0, 0, .5);
+    grid-area: main-info;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgba(0, 200, 255, 1);
+    border-radius: 2rem;
+    box-shadow: 0 0 1rem rgba(0, 200, 255, 1);
+}
+
+/* Alarm section wrapper */
+.alarm-wrapper{
+    grid-area: alarm-wrapper;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 1rem;
+    grid-template-areas: 
+        "armed-status"
+        "main-status" 
+        "zone-status";
+}
+
+.armed-status{
+    background-color: rgba(0, 0, 0, .5);
+    grid-area: armed-status;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgba(0, 200, 255, 1);
+    border-radius: 2rem;
+    box-shadow: 0 0 1rem rgba(0, 200, 255, 1);
+}
+
+.main-status{
+    background-color: rgba(0, 0, 0, .5);
+    grid-area: main-status;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgba(0, 200, 255, 1);
+    border-radius: 2rem;
+    box-shadow: 0 0 1rem rgba(0, 200, 255, 1);
+}
+
+.zone-status{
+    background-color: rgba(0, 0, 0, .5);
+    grid-area: zone-status;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgba(0, 200, 255, 1);
+    border-radius: 2rem;
+    box-shadow: 0 0 1rem rgba(0, 200, 255, 1);
+}
+
+/* lights section wrapper */
+.lights-wrapper{
+    grid-area: lights-wrapper;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 1rem;
+    grid-template-areas: 
+        "tv-led" 
+        "lamp-led";
+}
+
+.tv-led{
+    background-color: rgba(0, 0, 0, .5);
+    grid-area: tv-led;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgba(0, 200, 255, 1);
+    border-radius: 2rem;
+    box-shadow: 0 0 1rem rgba(0, 200, 255, 1);
+}
+
+.lamp-led{
+    background-color: rgba(0, 0, 0, .5);
+    grid-area: lamp-led;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgba(0, 200, 255, 1);
+    border-radius: 2rem;
+    box-shadow: 0 0 1rem rgba(0, 200, 255, 1);
+}
+
+footer{
+    grid-area: footer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+@media screen and (min-width: 800px){
+    html{
+        height: 100vh;
+    }
+
+    /* Main section wrapper */
+    .main-wrapper{
+        grid-area: main-wrapper;
+        padding: 0 1rem;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr 1fr;        
+        padding-bottom: 1rem;
+        /* gap: 1rem; */
+        grid-template-areas: 
+            "main-info"
+            "alarm-wrapper"
+            "lights-wrapper";
+    }
+
+    .main-info{
+        grid-area: main-info;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* Alarm section wrapper */
+    .alarm-wrapper{
+        grid-area: alarm-wrapper;
+        padding: 0;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: 1fr;
+        gap: 1rem;
+        grid-template-areas: 
+            "armed-status main-status zone-status";
+    }
+
+    .armed-status{
+        grid-area: armed-status;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: initial;
+    }
+
+    .main-status{
+        grid-area: main-status;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: initial;
+    }
+
+    .zone-status{
+        grid-area: zone-status;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: initial;
+    }
+
+    /* lights section wrapper */
+    .lights-wrapper{
+        grid-area: lights-wrapper;
+        padding: 0;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr;
+        gap: 1rem;
+        grid-template-areas: 
+            "tv-led lamp-led";
+    }
+
+    .tv-led{
+        grid-area: tv-led;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: initial;
+    }
+
+    .lamp-led{
+        grid-area: lamp-led;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: initial;
+    }
+}

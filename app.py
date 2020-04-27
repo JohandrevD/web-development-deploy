@@ -16,6 +16,12 @@ def index():
 
     return render_template('index.html')
 
+@app.route('/iot')
+def iot():
+    """ Default route page  """
+
+    return render_template('iot.html')
+
 
 if __name__ == "__main__":    
 

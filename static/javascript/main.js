@@ -1,5 +1,62 @@
-// PubNub control starts here
-const clientUUID = 'Johandré-website';
+// ----- Typewriter code starts here ----- //
+
+const TypeWriter = function(txtElement, words, wait = 3000){
+    this.txtElement = txtElement;
+    this.words = words;
+    this.txt = '';
+    this.wordIndex = 0;
+    this.wait = parseInt(wait, 10);
+    this.isDeleting = false;
+    this.type();
+}
+
+// Type method
+TypeWriter.prototype.type = function(){
+    const currentIndex = this.wordIndex % this.words.length;                    // Current index of word
+    const fullTxt = this.words[currentIndex];                                   // Get full text of current word
+
+    if(this.isDeleting){
+        this.txt = fullTxt.substring(0, this.txt.length - 1)                    // Remove char
+    }else{
+        this.txt = fullTxt.substring(0, this.txt.length + 1)                    // Add char
+    }
+
+    this.txtElement.innerHTML = `<span class="txt">${this.txt}</span>`          // Insert txt into element
+
+    let typeSpeed = 300;                                                        // Initial type speed
+
+    if(this.isDeleting){typeSpeed /= 2;}
+
+    // Check if word is complete
+    if (!this.isDeleting && this.txt === fullTxt){
+        typeSpeed = this.wait;                                                  // Pause at end
+        this.isDeleting = true;                                                 // Set delete to true
+    }
+    else if(this.isDeleting && this.txt === ''){
+        this.isDeleting = false;
+        this.wordIndex++;                                                       // Move to the next word
+        typeSpeed = 500;                                                        // Pause before start typing
+    }
+
+    setTimeout(() => this.type(), typeSpeed)
+}
+
+// Init on DOM load
+document.addEventListener('DOMContentLoaded', init)
+
+// Init App
+function init(){
+    const txtElement = document.querySelector('.txt-type');
+    const words = JSON.parse(txtElement.getAttribute('data-words'));
+    const wait = txtElement.getAttribute('data-wait');
+
+    // Init Typewriter
+    new TypeWriter(txtElement, words, wait);
+}
+// ----- Typewriter code ends here ----- //
+
+// ----- PubNub control starts here ----- //
+const clientUUID = 'Website-Index-HTML';
 const theChannel = 'web-control';
 
 const pubnub = new PubNub({
@@ -13,10 +70,10 @@ const pubnub = new PubNub({
 function listen(){
     pubnub.addListener({
         message: function(m) {
-            console.log('Message')
+            // console.log('Message')
         },
         presence: function(p) {
-            console.log('Presence')
+            // console.log('Presence')
         }
     });
 };
@@ -25,16 +82,8 @@ function controlMessages(msg){
     console.log(msg);
 };
 
-function controlPresence(userID, userAction, date_time){  
-    if(userID == 'Raspberry-pi') {
-        getTimeFormat(date_time);
-        if(userAction == "leave"){
-            sendMail('Raspberry Pi', 'Disconnected')
-        }
-        else if(userAction == 'join'){
-            sendMail('Raspberry Pi', 'Connected')
-        }
-    }
+function controlPresence(p){  
+    // console.log(p);
 };
 
 
@@ -47,3 +96,27 @@ document.addEventListener('DOMContentLoaded', function(){
 });
 
 document.addEventListener('DOMContentLoaded', listen());
+
+function check_pi(){
+    pubnub.hereNow(
+        {
+            channels: [theChannel], 
+            includeUUIDs: true
+        },
+        function (status, response) {
+            var connected_channel = response.channels['web-control']['occupants'];
+            var users = [];
+            for(let val in connected_channel){
+                users.push(connected_channel[val].uuid)
+            }
+            if(users.includes('Raspberry-pi')){
+                window.location.href = window.location.href.split('/')[0] + 'iot';
+            }
+            else{
+                alert('Controller is not running');
+                document.querySelector('h5').innerHTML = 'Controller is not running';
+                document.getElementById('enter-btn').innerHTML = 'No access';
+            }              
+        }
+    );
+};
