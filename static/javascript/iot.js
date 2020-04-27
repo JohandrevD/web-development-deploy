@@ -13,6 +13,7 @@ const pubnub = new PubNub({
 document.addEventListener('DOMContentLoaded', check_pi());
 
 function check_pi(){
+    console.log('test')
     pubnub.hereNow(
         {
             channels: [theChannel], 
