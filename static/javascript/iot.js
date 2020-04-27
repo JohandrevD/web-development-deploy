@@ -18,12 +18,14 @@ document.addEventListener('DOMContentLoaded', function(){
     console.log('Subscribed');
 });
 
+document.addEventListener('DOMContentLoaded', listen());
+
 document.addEventListener('DOMContentLoaded', check_pi());
 
 function listen(){
     pubnub.addListener({
         message: function(m) {
-            controlMessages(m.message);
+            controlMessages(m);
         },
         presence: function(p) {
             // console.log('Presence')
