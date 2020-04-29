@@ -14,7 +14,7 @@ app = Flask(__name__)
 def index():
     """ Default route page  """
 
-    return render_template('index.html')
+    return render_template('sick.html')
 
 @app.route('/iot')
 def iot():

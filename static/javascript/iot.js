@@ -1,3 +1,9 @@
+if(!!window.performance && window.performance.navigation.type === 2)
+{
+    console.log('Reloading');
+    window.location.reload();
+}
+
 var t_day=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 var t_month=["January","February","March","April","May","June","July","August","September","October","November","December"];
 
@@ -47,35 +53,58 @@ const pubnub = new PubNub({
     keepAlive: true
 });
 
-document.addEventListener('DOMContentLoaded', function(){
-    pubnub.subscribe({
-        channels: [theChannel],
-        withPresence: true
-    });
-    console.log('Subscribed');
+pubnub.subscribe({
+    channels: [theChannel],
+    withPresence: true
 });
 
-document.addEventListener('DOMContentLoaded', listen());
-
-document.addEventListener('DOMContentLoaded', check_pi());
-
-function listen(){
-    pubnub.addListener({
-        message: function(m) {
-            controlMessages(m);
-        },
-        presence: function(p) {
-            controlPresence(p)
+pubnub.hereNow(
+    {
+        channels: [theChannel], 
+        includeUUIDs: true
+    },
+    function (status, response) {
+        var connected_channel = response.channels['Web_Control']['occupants'];
+        var users = [];
+        for(let val in connected_channel){
+            users.push(connected_channel[val].uuid);
         }
-    });
-};
+        if(!users.includes('Raspberry_Pi')){
+            window.location = window.location.href.split('/iot')[0];
+        }
+        else{
+            var PassWord = prompt("Please enter the password:");
 
-function controlMessages(msg){
-    if(msg.publisher == 'Raspberry_Pi'){
-        if(msg.message == 'Access'){
+            if(PassWord == null || PassWord == ''){
+                PassWord = prompt("Please enter valid text:");
+            }
+            else{
+                // console.log(PassWord);
+                pubnub.publish({
+                    message: {
+                        'password': PassWord},
+                    channel: theChannel
+                });
+            }
+        }          
+    }
+);
+
+pubnub.addListener({
+    message: function(m) {
+        controlMessages(m);
+    },
+    presence: function(p) {
+        controlPresence(p)
+    }
+});
+
+function controlMessages(m){
+    if(m.publisher == 'Raspberry_Pi'){
+        if(m.message['access'] == 'Access'){
             document.querySelector('body').style.visibility = 'visible';
         }
-        if(msg.message == 'No Access'){
+        else if(m.message['access'] == 'No Access'){
             alert('Incorrect password!');
             window.location = window.location.href.split('/iot')[0];
         }
@@ -83,52 +112,22 @@ function controlMessages(msg){
 };
 
 function controlPresence(p){  
+    console.log(p.uuid + ' - ' + p.action)
+
     if(p.uuid == 'Raspberry_Pi' && p.action == 'leave'){
         alert('Controller is now offline');
+        pubnub.unsubscribeAll();
         window.location = window.location.href.split('/iot')[0];
     }
 };
 
-function check_pi(){
-    pubnub.hereNow(
-        {
-            channels: [theChannel], 
-            includeUUIDs: true
-        },
-        function (status, response) {
-            var connected_channel = response.channels['Web_Control']['occupants'];
-            var users = [];
-            for(let val in connected_channel){
-                users.push(connected_channel[val].uuid)
-            }
-            if(!users.includes('Raspberry_Pi')){
-                window.location = window.location.href.split('/iot')[0];
-            }
-            else{
-                var PassWord = prompt("Please enter the password:")
+// // function arm_checkbox(){
+// //     var arm_disarm_checkbox = document.getElementById('armed-button')
 
-                if(PassWord == null || PassWord == ''){
-                    PassWord = prompt("Please enter valid text:")
-                }
-                else{
-                    pubnub.publish({
-                        message: {
-                            'password': PassWord},
-                        channel: theChannel
-                    });
-                }
-            }          
-        }
-    );
-};
-
-function arm_checkbox(){
-    var arm_disarm_checkbox = document.getElementById('armed-button')
-
-    if(arm_disarm_checkbox.checked == true){
-        pubnub.publish({message: {alarm: 'Armed'}, channel: theChannel});
-    }
-    else{
-        pubnub.publish({message: {alarm: 'Disarmed'}, channel: theChannel});
-    }
-}
+// //     if(arm_disarm_checkbox.checked == true){
+// //         pubnub.publish({message: {alarm: 'Armed'}, channel: theChannel});
+// //     }
+// //     else{
+// //         pubnub.publish({message: {alarm: 'Disarmed'}, channel: theChannel});
+// //     }
+// // }

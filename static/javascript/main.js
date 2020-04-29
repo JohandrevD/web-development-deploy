@@ -1,3 +1,9 @@
+if(!!window.performance && window.performance.navigation.type === 2)
+{
+    console.log('Reloading');
+    window.location.reload();
+}
+
 // ----- Typewriter code starts here ----- //
 
 const TypeWriter = function(txtElement, words, wait = 3000){
@@ -67,57 +73,61 @@ const pubnub = new PubNub({
     keepAlive: true
 });
 
-function listen(){
-    pubnub.addListener({
-        message: function(m) {
-            // console.log('Message')
-        },
-        presence: function(p) {
-            controlPresence(p)
-        }
-    });
-};
+pubnub.subscribe({
+    channels: [theChannel],
+    withPresence: true
+});
 
-function controlMessages(msg){
-    console.log(msg);
-};
+pubnub.hereNow(
+    {
+        channels: [theChannel], 
+        includeUUIDs: true
+    },
+    function (status, response) {
+        var connected_channel = response.channels['Web_Control']['occupants'];
+        var users = [];
+        for(let val in connected_channel){
+            users.push(connected_channel[val].uuid)
+        }
+        if(!users.includes('Raspberry_Pi')){
+            // alert('Controller is not running');
+            document.querySelector('h5').innerHTML = 'Controller is not running';
+            document.getElementById('enter-btn').innerHTML = 'No access';
+        }
+        else if(users.includes('Raspberry_Pi')){
+            // alert('Controller is not running');
+            document.querySelector('h5').innerHTML = 'Ready to control';
+            document.getElementById('enter-btn').innerHTML = 'Enter';
+        }              
+    }
+);
+
+pubnub.addListener({
+    message: function(m) {
+        // console.log('Message')
+    },
+    presence: function(p) {
+        controlPresence(p)
+    }
+});
+
+// function controlMessages(msg){
+//     console.log(msg);
+// };
 
 function controlPresence(p){  
+    console.log(p.uuid + ' - ' + p.action)
+
     if(p.uuid == 'Raspberry_Pi' && p.action == 'join'){
         alert('Controller is now online');
                 document.querySelector('h5').innerHTML = 'Ready to control';
                 document.getElementById('enter-btn').innerHTML = 'Enter';
     }
+    else if(p.uuid == 'Raspberry_Pi' && p.action == 'leave'){
+        alert('Controller is now offline');
+        window.location = window.location.href.split('/iot')[0];
+    }
 };
-
-
-document.addEventListener('DOMContentLoaded', function(){
-    pubnub.subscribe({
-        channels: [theChannel],
-        withPresence: true
-    });
-    
-    pubnub.hereNow(
-        {
-            channels: [theChannel], 
-            includeUUIDs: true
-        },
-        function (status, response) {
-            var connected_channel = response.channels['Web_Control']['occupants'];
-            var users = [];
-            for(let val in connected_channel){
-                users.push(connected_channel[val].uuid)
-            }
-            if(!users.includes('Raspberry_Pi')){
-                alert('Controller is not running');
-                document.querySelector('h5').innerHTML = 'Controller is not running';
-                document.getElementById('enter-btn').innerHTML = 'No access';
-            }              
-        }
-    );
-});
-
-document.addEventListener('DOMContentLoaded', listen());
 
 function check_pi(){
     pubnub.hereNow(
@@ -132,7 +142,8 @@ function check_pi(){
                 users.push(connected_channel[val].uuid)
             }
             if(users.includes('Raspberry_Pi')){
-                window.location.href = window.location.href.split('/')[0] + 'iot';
+                pubnub.unsubscribeAll();
+                window.location.href = window.location.href.split('/')[0] + 'iot.html';
             }
             else{
                 alert('Controller is not running');

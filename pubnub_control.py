@@ -1,7 +1,7 @@
 import threading
 
 from pubnub.callbacks import SubscribeCallback
-from pubnub.enums import PNStatusCategory
+from pubnub.enums import PNStatusCategory, PNHeartbeatNotificationOptions
 from pubnub.pnconfiguration import PNConfiguration
 from pubnub.pubnub import PubNub
 
@@ -20,13 +20,15 @@ class MySubscribeCallbackClass(SubscribeCallback):
 		self.pnconfig.subscribe_key = 'sub-c-3e28b73e-8348-11ea-881d-66486515f06e'
 		self.pnconfig.publish_key = 'pub-c-723918b5-9e0d-4820-a277-3dda21d465cb'
 		self.pnconfig.uuid = "Website_Main_Python"
+		self.pnconfig.daemon = True
+		self.pnconfig._heartbeat_interval = 1
+		self.pnconfig.heartbeat_notification_options = PNHeartbeatNotificationOptions.ALL
 
 		self.pubnub = PubNub(self.pnconfig)
 		self.pubnubChannel = 'Web_Control'
 
 	def presence(self, pubnub, presence):
-		self.control_presence(
-			presence.uuid, presence.event, presence.timetoken)
+		self.control_presence(presence.uuid, presence.event, presence.timetoken)
 
 	def message(self, pubnub, message):
 		self.control_message(message)
@@ -35,21 +37,26 @@ class MySubscribeCallbackClass(SubscribeCallback):
 		pass  # handle incoming signals
 
 	def control_message(self, msg):
-		if(msg.publisher == 'Website_IoT_HTML'):
-			if(msg.message == 'Jvd77655'):
-				self.pubnub.publish().channel(self.pubnubChannel).message('Access').sync()
-				mail_sender_cls.send_mail('IoT', 'Access Granted')
-			else:
-				self.pubnub.publish().channel(self.pubnubChannel).message('No Access').sync()
-				mail_sender_cls.send_mail(
-					'IoT', 'Someone tried to access the page')
+		print(msg)
+		# if(msg.publisher == 'Website_IoT_HTML'):			
+			# if(msg.message == 'Jvd77655'):
+			# 	self.pubnub.publish().channel(self.pubnubChannel).message('Access').sync()
+			# 	mail_sender_cls.send_mail('IoT', 'Access Granted')
+			# else:
+			# 	self.pubnub.publish().channel(self.pubnubChannel).message('No Access').sync()
+			# 	mail_sender_cls.send_mail(
+			# 		'IoT', 'Someone tried to access the page')
 
 	def control_presence(self, userID, userAction, date_time):
+		print(userID + ' - ' + userAction)
+
 		if(userID == 'Raspberry_Pi'):
 			if(userAction == "leave"):
-				mail_sender_cls.send_mail('Raspberry Pi', 'Disconnected')
+				pass
+				# mail_sender_cls.send_mail('Raspberry Pi', 'Disconnected')
 			elif(userAction == 'join'):
-				mail_sender_cls.send_mail('Raspberry Pi', 'Connected')
+				pass
+				# mail_sender_cls.send_mail('Raspberry Pi', 'Connected')
 
 
 class PubNubControlClass(object):
@@ -60,6 +67,9 @@ class PubNubControlClass(object):
 		self.pnconfig.subscribe_key = 'sub-c-3e28b73e-8348-11ea-881d-66486515f06e'
 		self.pnconfig.publish_key = 'pub-c-723918b5-9e0d-4820-a277-3dda21d465cb'
 		self.pnconfig.uuid = "Website_Main_Python"
+		self.pnconfig.daemon = True
+		self.pnconfig._heartbeat_interval = 1
+		self.pnconfig.heartbeat_notification_options = PNHeartbeatNotificationOptions.ALL
 
 		self.pubnub = PubNub(self.pnconfig)
 		self.pubnubChannel = 'Web_Control'
