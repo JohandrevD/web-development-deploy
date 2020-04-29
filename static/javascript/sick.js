@@ -32,18 +32,31 @@ function onConnect(){
 
 function onMessageArrived(r_message)
 {	    
-    out_msg = JSON.parse(r_message.payloadString);
-    console.log(out_msg.info.dio_a);
-    document.getElementById('msc_info').innerHTML = out_msg.payloadString;
-}
+    out_msg = JSON.parse(r_message);
+    console.log(out_msg);
+    console.log('Testing')
+    document.getElementById('msc_info').innerHTML = 'Running';
+};
 
 function onFailure(message) {
     console.log("Failed");
     setTimeout(MQTTconnect(), reconnectTimeout);
-}
+};
 
 function onConnectionLost(){
     console.log("connection lost");
     MQTTconnect();
-}
+};
+
+function MscController(msg){
+
+};
+
+function SoftwareControler(msg){
+
+};
+
+function ErrorController(msg){
+
+};
 

@@ -5,6 +5,9 @@
 		<meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+        <!-- Your own stylesheet -->
+		<link rel="stylesheet" type="text/css" href="../static/css/sick.css">
+
         <!-- jQuery -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
@@ -14,8 +17,58 @@
 	</head>
 
 	<body>
-        <div class="msc_qrapper">
-            <p id="msc_info">Hello</p>
+        <div class="main_wrapper">
+            <div class="test_wrapper">
+                Test
+            </div>
+            <div class="msc_wrapper">
+                <div class="label_wrapper">
+                    <div class="label" id="msc_device_name_label">Device name:</div>
+                    <div class="label" id="msc_device_id_label">Device ID:</div>
+                    <div class="label" id="msc_system_ready_label">System ready:</div>
+                    <div class="label" id="msc_dio_1_label">Digital Input 1:</div>
+                </div>
+                <div class="info_wrapper">
+                    <div class="label" id="msc_device_name_info">Device name:</div>
+                    <div class="label" id="msc_device_id_info">Device ID:</div>
+                    <div class="label" id="msc_system_ready_info">System ready:</div>
+                    <div class="label" id="msc_dio_1_info">Digital Input 1:</div>
+                </div>
+            </div>
+            <div class="software_wrapper">
+                <div class="label_wrapper">
+                    <div class="label" id="software_number_label">Number:</div>
+                    <div class="label" id="software_date_label">Date:</div>
+                    <div class="label" id="software_time_label">Time:</div>
+                    <div class="label" id="software_barcode_label">Barcode:</div>
+                    <div class="label" id="software_length_label">Length:</div>
+                    <div class="label" id="software_width_label">Width:</div>
+                    <div class="label" id="software_height_label">Height:</div>
+                    <div class="label" id="software_volume_label">Volume:</div>
+                    <div class="label" id="software_weight_label">Weight:</div>
+                </div>
+                <div class="info_wrapper">
+                    <div class="label" id="software_number_info">Number:</div>
+                    <div class="label" id="software_date_info">Date:</div>
+                    <div class="label" id="software_time_info">Time:</div>
+                    <div class="label" id="software_barcode_info">Barcode:</div>
+                    <div class="label" id="software_length_info">Length:</div>
+                    <div class="label" id="software_width_info">Width:</div>
+                    <div class="label" id="software_height_info">Height:</div>
+                    <div class="label" id="software_volume_info">Volume:</div>
+                    <div class="label" id="software_weight_info">Weight:</div>
+                </div>
+            </div>
+            <div class="error_wrapper">
+                <div class="label_wrapper">
+                    <div class="label" id="icr890_1_error_label">Error:</div>
+                    <div class="label" id="scale_error_label">Error:</div>
+                </div>
+                <div class="info_wrapper">
+                    <div class="label" id="icr890_1_error_info">Error:</div>
+                    <div class="label" id="scale_error_info">Error:</div>
+                </div>
+            </div>
         </div>
     
 		<script type="text/javascript" src="../static/javascript/sick.js"></script>
