@@ -3,7 +3,6 @@ var reconnectTimeout = 2000;
 var host = "test.mosquitto.org";
 var port = 8080;
 var topic = 'TDC_E_Comms';
-var test_topic = 'TDC_E_Comms_Test';
 
 MQTTconnect();
 
@@ -26,7 +25,6 @@ function onConnect(){
     console.log('Connectedsssss');
     console.log("Subscribing to topic ="+topic);
     mqtt.subscribe(topic);
-    mqtt.subscribe(_test_topic);
     message = new Paho.MQTT.Message("Hello");
     message.destinationName = "World";
     mqtt.send(message);
