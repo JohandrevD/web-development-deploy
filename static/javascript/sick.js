@@ -33,7 +33,7 @@ function onConnect(){
 function onMessageArrived(r_message)
 {	    
     out_msg = r_message;
-    console.log(out_msg.payloadString);
+    console.log(out_msg);
     document.getElementById('msc_info').innerHTML = out_msg['topic'];
 }
 
