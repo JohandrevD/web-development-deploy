@@ -32,7 +32,7 @@ function onConnect(){
 
 function onMessageArrived(r_message)
 {	    
-    out_msg = r_message;
+    out_msg = r_message.payloadString;
     console.log(out_msg);
 }
 
