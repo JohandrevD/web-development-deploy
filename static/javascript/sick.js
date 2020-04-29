@@ -25,9 +25,9 @@ function onConnect(){
     console.log('Connectedsssss');
     console.log("Subscribing to topic ="+topic);
     mqtt.subscribe(topic);
-    message = new Paho.MQTT.Message("Hello");
-    message.destinationName = "World";
-    mqtt.send(message);
+    // message = new Paho.MQTT.Message("Hello");
+    // message.destinationName = "World";
+    // mqtt.send(message);
 }
 
 function onMessageArrived(r_message)
