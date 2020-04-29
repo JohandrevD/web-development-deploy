@@ -2,7 +2,7 @@ var mqtt;
 var reconnectTimeout = 2000;
 var host = "broker.hivemq.com";
 var port = 8000;
-var topic = 'TDC_E_Commss';
+var topic = 'TDC_E_Comms';
 
 MQTTconnect();
 
