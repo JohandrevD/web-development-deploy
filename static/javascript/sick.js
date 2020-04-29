@@ -24,6 +24,7 @@ function MQTTconnect(){
 function onConnect(){
     console.log('Connectedsssss');
     console.log("Subscribing to topic ="+topic);
+    console.log('Testing')
     mqtt.subscribe(topic);
     // message = new Paho.MQTT.Message("Hello");
     // message.destinationName = "World";
@@ -48,15 +49,15 @@ function onConnectionLost(){
     MQTTconnect();
 }
 
-function MscController(msg){
+// function MscController(msg){
 
-}
+// }
 
-function SoftwareControler(msg){
+// function SoftwareControler(msg){
 
-}
+// }
 
-function ErrorController(msg){
+// function ErrorController(msg){
 
-}
+// }
 
