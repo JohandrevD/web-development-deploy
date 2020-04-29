@@ -34,7 +34,7 @@ function onMessageArrived(r_message)
 {	    
     out_msg = r_message;
     console.log(out_msg.payloadString);
-    document.getElementById('msc_info').innerHTML = out_msg;
+    document.getElementById('msc_info').innerHTML = out_msg.topic;
 }
 
 function onFailure(message) {
