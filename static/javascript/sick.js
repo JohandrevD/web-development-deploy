@@ -32,7 +32,7 @@ function onConnect(){
 
 function onMessageArrived(r_message)
 {	    
-    out_msg = r_message;
+    out_msg = JSON.parse(r_message);
     console.log(out_msg.payloadString.device);
     document.getElementById('msc_info').innerHTML = out_msg.payloadString;
 }
