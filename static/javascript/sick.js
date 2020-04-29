@@ -15,7 +15,6 @@ function MQTTconnect(){
         onFailure: onFailure
     };
 
-    mqtt.onConnectionLost = onConnectionLost;
     mqtt.onMessageArrived = onMessageArrived;
 
     mqtt.connect(options);
