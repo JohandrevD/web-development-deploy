@@ -2,7 +2,7 @@ var mqtt;
 var reconnectTimeout = 2000;
 var host = "test.mosquitto.org";
 var port = 8080;
-var topic = 'TDC_E_Comms';
+var topic = 'TDC_E_Commss';
 
 MQTTconnect();
 
