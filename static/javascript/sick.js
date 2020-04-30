@@ -34,7 +34,13 @@ function onConnect(){
 function onMessageArrived(r_message)
 {	    
     // out_msg = JSON.parse(r_message);
+    out_msg = r_message.payloadString
     console.log(r_message.payloadString);
+    if('device' in out_msg){
+        if(out_msg.device == 'MSC_800'){
+            MscController(out_msg.info);
+        }
+    }
     // console.log('Testing');
     // document.getElementById('msc_info').innerHTML = 'Running';
 }
@@ -49,9 +55,11 @@ function onConnectionLost(){
     MQTTconnect();
 }
 
-// function MscController(msg){
+function MscController(msg){
+    var msc_device_name = document.getElementById('msc_device_name_info')
 
-// }
+    msc_device_name.innerHTML = msg.device_name;
+}
 
 // function SoftwareControler(msg){
 
