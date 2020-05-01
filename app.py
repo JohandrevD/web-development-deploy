@@ -3,7 +3,7 @@ import atexit
 from flask import Flask, render_template
 from time import sleep
 
-from pubnub_controler import PubNubControlClass
+from pubnub_controller import PubNubControlClass
 
 pubnub_control_class = PubNubControlClass()
 
