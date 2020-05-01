@@ -71,4 +71,17 @@ pubnub.subscribe({
     withPresence: true
 });
 
+pubnub.addListener({
+    message: function(m) {
+        // console.log('Message')
+    },
+    presence: function(p) {
+        controlPresence(p)
+    }
+});
+
+function controlPresence(p){  
+    console.log(p.uuid + ' - ' + p.action)
+};
+
 // ----- PubNub control starts here ----- //
