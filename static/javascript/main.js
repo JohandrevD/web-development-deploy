@@ -95,4 +95,26 @@ function controlPresence(p){
 	}
 };
 
+pubnub.hereNow(
+    {
+        channels: [theChannel], 
+        includeUUIDs: true
+    },
+    function (status, response) {
+        var connected_channel = response.channels['Web_Control']['occupants'];
+        var users = [];
+        for(let val in connected_channel){
+            users.push(connected_channel[val].uuid)
+        }
+        if(!users.includes('Raspberry_Pi')){
+            document.querySelector('h5').innerHTML = 'Controller is not running';
+            document.getElementById('enter-btn').innerHTML = 'No access';
+        }
+        else if(users.includes('Raspberry_Pi')){
+            document.querySelector('h5').innerHTML = 'Ready to control';
+            document.getElementById('enter-btn').innerHTML = 'Enter';
+        }              
+    }
+);
+
 // ----- PubNub control starts here ----- //

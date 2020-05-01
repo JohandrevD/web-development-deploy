@@ -24,7 +24,7 @@ class MySubscribeCallbackClass(SubscribeCallback):
 				print('Raspberry Pi Disconnected')
 				# mail_sender_cls.send_mail('Raspberry Pi', 'Disconnected')
 			elif(user_action == 'join'):
-				print('Raspberry Pi Disconnected')
+				print('Raspberry Pi Connected')
 				# mail_sender_cls.send_mail('Raspberry Pi', 'Connected')
 
 	def control_message(self, msg):
