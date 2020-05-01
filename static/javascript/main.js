@@ -53,3 +53,22 @@ function init(){
     new TypeWriter(txtElement, words, wait);
 }
 // ----- Typewriter code ends here ----- //
+
+// ----- PubNub control starts here ----- //
+const clientUUID = 'Website_Index_HTML';
+const theChannel = 'Web_Control';
+
+const pubnub = new PubNub({
+    publishKey: 'pub-c-723918b5-9e0d-4820-a277-3dda21d465cb',
+    subscribeKey: 'sub-c-3e28b73e-8348-11ea-881d-66486515f06e',
+    uuid: clientUUID,
+    heartbeatInterval: 1,
+    keepAlive: true
+});
+
+pubnub.subscribe({
+    channels: [theChannel],
+    withPresence: true
+});
+
+// ----- PubNub control starts here ----- //
