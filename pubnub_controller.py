@@ -19,7 +19,7 @@ class MySubscribeCallbackClass(SubscribeCallback):
 	def control_presence(self, pubnub, user_id, user_action):
 		print(user_id + ' - ' + user_action)
 
-		if(user_id == 'Raspberry_Pi'):
+		if(user_id == 'Raspberry_Pi_Controller'):
 			if(user_action == "leave"):
 				print('Raspberry Pi Disconnected')
 				# mail_sender_cls.send_mail('Raspberry Pi', 'Disconnected')
