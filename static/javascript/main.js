@@ -106,11 +106,11 @@ pubnub.hereNow(
         for(let val in connected_channel){
             users.push(connected_channel[val].uuid)
         }
-        if(!users.includes('Raspberry_Pi')){
+        if(!users.includes('Raspberry_Pi_Controller')){
             document.querySelector('h5').innerHTML = 'Controller is not running';
             document.getElementById('enter-btn').innerHTML = 'No access';
         }
-        else if(users.includes('Raspberry_Pi')){
+        else if(users.includes('Raspberry_Pi_Controller')){
             document.querySelector('h5').innerHTML = 'Ready to control';
             document.getElementById('enter-btn').innerHTML = 'Enter';
         }              
