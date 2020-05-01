@@ -3,9 +3,9 @@ import atexit
 from flask import Flask, render_template
 from time import sleep
 
-from pubnub_control import PubNubControlClass
+# from pubnub_control import PubNubControlClass
 
-pubnub_control_class = PubNubControlClass()
+# pubnub_control_class = PubNubControlClass()
 
 app = Flask(__name__)
 
