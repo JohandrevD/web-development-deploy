@@ -137,7 +137,7 @@ function check_pi(){
 			}
 			if(users.includes('Raspberry_Pi_Controller')){
 				pubnub.unsubscribeAll();
-				window.location.href = window.location.href.split('/')[0] + 'iot.html';
+				window.location.href = window.location.href.split('/')[0] + 'iot';
 			}
 			else{
 				alert('Controller is not running');
