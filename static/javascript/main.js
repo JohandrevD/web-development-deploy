@@ -1,3 +1,9 @@
+if(!!window.performance && window.performance.navigation.type === 2)
+{
+	window.location.reload();
+	console.log('Reloading');
+}
+
 // Init on DOM load
 document.addEventListener('DOMContentLoaded', init)
 
@@ -96,25 +102,50 @@ function controlPresence(p){
 };
 
 pubnub.hereNow(
-    {
-        channels: [theChannel], 
-        includeUUIDs: true
-    },
-    function (status, response) {
-        var connected_channel = response.channels['Web_Control']['occupants'];
-        var users = [];
-        for(let val in connected_channel){
-            users.push(connected_channel[val].uuid)
-        }
-        if(!users.includes('Raspberry_Pi_Controller')){
-            document.querySelector('h5').innerHTML = 'Controller is not running';
-            document.getElementById('enter-btn').innerHTML = 'No access';
-        }
-        else if(users.includes('Raspberry_Pi_Controller')){
-            document.querySelector('h5').innerHTML = 'Ready to control';
-            document.getElementById('enter-btn').innerHTML = 'Enter';
-        }              
-    }
+	{
+		channels: [theChannel], 
+		includeUUIDs: true
+	},
+	function (status, response) {
+		var connected_channel = response.channels['Web_Control']['occupants'];
+		var users = [];
+		for(let val in connected_channel){
+			users.push(connected_channel[val].uuid)
+		}
+		if(!users.includes('Raspberry_Pi_Controller')){
+			document.querySelector('h5').innerHTML = 'Controller is not running';
+			document.getElementById('enter-btn').innerHTML = 'No access';
+		}
+		else if(users.includes('Raspberry_Pi_Controller')){
+			document.querySelector('h5').innerHTML = 'Ready to control';
+			document.getElementById('enter-btn').innerHTML = 'Enter';
+		}              
+	}
 );
+
+function check_pi(){
+	pubnub.hereNow(
+		{
+			channels: [theChannel], 
+			includeUUIDs: true
+		},
+		function (status, response) {
+			var connected_channel = response.channels['Web_Control']['occupants'];
+			var users = [];
+			for(let val in connected_channel){
+				users.push(connected_channel[val].uuid)
+			}
+			if(users.includes('Raspberry_Pi_Controller')){
+				pubnub.unsubscribeAll();
+				window.location.href = window.location.href.split('/')[0] + 'iot.html';
+			}
+			else{
+				alert('Controller is not running');
+				document.querySelector('h5').innerHTML = 'Controller is not running';
+				document.getElementById('enter-btn').innerHTML = 'No access';
+			}              
+		}
+	);
+};
 
 // ----- PubNub control starts here ----- //
