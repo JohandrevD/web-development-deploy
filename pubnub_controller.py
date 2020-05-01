@@ -18,7 +18,7 @@ class MySubscribeCallbackClass(SubscribeCallback):
 
 	def control_presence(self, pubnub, user_id, user_action):
 		print(user_id + ' - ' + user_action)
-		pubnub.publish().channel("Web_Control").message({'web': 'Website'}).sync()
+		# pubnub.publish().channel("Web_Control").message({'web': 'Website'}).sync()
 
 	def control_message(self, msg):
 		print(msg.message)
