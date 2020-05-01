@@ -18,7 +18,14 @@ class MySubscribeCallbackClass(SubscribeCallback):
 
 	def control_presence(self, pubnub, user_id, user_action):
 		print(user_id + ' - ' + user_action)
-		# pubnub.publish().channel("Web_Control").message({'web': 'Website'}).sync()
+		
+        if(userID == 'Raspberry_Pi'):
+			if(userAction == "leave"):
+				print('Raspberry Pi Disconnected')
+				# mail_sender_cls.send_mail('Raspberry Pi', 'Disconnected')
+			elif(userAction == 'join'):
+				print('Raspberry Pi Disconnected')
+				# mail_sender_cls.send_mail('Raspberry Pi', 'Connected')
 
 	def control_message(self, msg):
 		print(msg.message)
