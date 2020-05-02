@@ -229,11 +229,11 @@ input{
     transition: left .5s;
 }
 
-#switch-button:checked ~ .switch-button-label{
+.switch_button:checked ~ .switch-button-label{
     background-color: red;
 }
 
-#switch-button:checked ~ .switch-button-label::before{
+.switch_button:checked ~ .switch-button-label::before{
     content: "ON";
     left: 2.5rem;
     color: red;

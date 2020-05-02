@@ -106,4 +106,12 @@ function controlMessages(m){
     }
 };
 
+$('#arm_button').change(function(){
+    if($(this).is(':checked')) {
+        console.log('Armed')
+    } else {
+        console.log('Disarmed')
+    }
+});
+
 // ----- PubNub control starts here ----- //
