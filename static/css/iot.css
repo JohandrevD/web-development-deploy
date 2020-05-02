@@ -26,8 +26,8 @@ html{
 }
 
 body{
-    background: url("../images/iot_backround_Portrait.jpg") center no-repeat;
-    background-size: cover;
+    background: url("../images/iot_backround.jpg") center no-repeat;
+    background-color: blanchedalmond;
     height: 100%;
     display: flex;
     justify-content: center;
@@ -41,7 +41,7 @@ a{
 
 i{
     margin-bottom: 0;
-    margin-right: 2rem;
+    margin-right: 1rem;
 }
 
 input{
@@ -52,11 +52,11 @@ input{
 .wrapper{    
     position: relative;
     width: 100%;
-    height: 90vh;
+    height: 100%;
     display: grid;
+    row-gap: .5rem;
     grid-template-columns: 1fr;
     grid-template-rows: minmax(5.5rem, 5.5rem) 1fr minmax(4rem, 4rem);
-    /* gap: 1rem; */
     grid-template-areas: 
         "nav-wrapper"
         "main-wrapper"
@@ -66,11 +66,9 @@ input{
 /* Navigation */
 .nav-wrapper{
     grid-area: nav-wrapper;
-    padding: 0 1rem;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr;
-    /* gap: 0 1rem; */
     grid-template-areas: 
         "logo heading exit-icon";
 }
@@ -80,16 +78,11 @@ input{
     display: flex;
     justify-content: left;
     align-items: center;
-    padding-left: 1rem;
-}
-
-.logo img{
-    width: 3rem;
 }
 
 .heading{
     grid-area: heading;
-    font-size: 2.5rem;
+    font-size: 2rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -98,7 +91,7 @@ input{
 .exit-icon{
     grid-area: exit-icon;
     display: flex;
-    justify-self: end;
+    justify-content: flex-end;
     align-items: center;
     padding-right: 1rem;
 }
@@ -111,6 +104,11 @@ input{
     padding: 0 1rem;
 }
 
+.exit-icon i{
+    margin-right: 0;
+    padding-left: 1rem;
+}
+
 .exit-icon a:hover{
     color: var(--secondary-font-color);
     background-color: transparent;
@@ -118,19 +116,13 @@ input{
     border-radius: 2rem;
 }
 
-.exit-icon i{
-    padding-left: 1rem;
-}
-
 /* Main section wrapper */
 .main-wrapper{
     grid-area: main-wrapper;
-    padding: 0 1rem;
     display: grid;
+    gap: .5rem;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 3fr 2fr;
-    gap: 1rem;
-    padding-bottom: 1rem;
     grid-template-areas: 
         "main-info"
         "alarm-wrapper"
@@ -138,16 +130,15 @@ input{
 }
 
 .main-info{
-    background-color: rgba(0, 0, 0, .5);
-    color: white;
+    font-size: 2rem;
     grid-area: main-info;
     display: grid;
     grid-template-columns: 1fr ;
     grid-template-rows: 1fr 1fr;
-    gap: 1rem;
     grid-template-areas: 
         "date-wrapper"
         "time-wrapper";
+    background-color: rgba(0, 0, 0, .5);
     border: 1px solid rgba(0, 200, 255, 1);
     border-radius: 2rem;
     box-shadow: 0 0 0.5rem rgba(0, 200, 255, 1);
@@ -158,7 +149,6 @@ input{
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 2.5rem;
 }
 
 .time-wrapper{
@@ -166,17 +156,15 @@ input{
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 2.5rem;
 }
 
 /* Alarm section wrapper */
 .alarm-wrapper{
     grid-area: alarm-wrapper;
-    padding: 0;
     display: grid;
+    gap: .5rem;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr 1fr;
-    gap: 1rem;
     grid-template-areas: 
         "armed-status"
         "main-status" 
@@ -184,15 +172,14 @@ input{
 }
 
 .armed-status{
-    background-color: rgba(0, 0, 0, .5);
-    color: white;
     grid-area: armed-status;
+    font-size: 2rem;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr;
-    gap: 1rem;
     grid-template-areas: 
         "armed-status-label armed-status-button";
+    background-color: rgba(0, 0, 0, .5);
     border: 1px solid rgba(0, 200, 255, 1);
     border-radius: 2rem;
     box-shadow: 0 0 0.5rem rgba(0, 200, 255, 1);
@@ -200,7 +187,6 @@ input{
 
 .armed-status-label{
     grid-area: armed-status-label;
-    font-size: 2rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -213,7 +199,7 @@ input{
     align-items: center;
 }
 
-.armed-button-label{
+.switch-button-label{
     display: inline-block;
     height: 3rem;
     width: 6rem;
@@ -224,7 +210,7 @@ input{
     transition: background-color 1s;
 }
 
-.armed-button-label::before{
+.switch-button-label::before{
     content: "OFF";
     font-weight: bold;
     font-size: 1.5rem;
@@ -243,35 +229,33 @@ input{
     transition: left .5s;
 }
 
-#armed-button:checked ~ .armed-button-label{
+#switch-button:checked ~ .switch-button-label{
     background-color: red;
 }
 
-#armed-button:checked ~ .armed-button-label::before{
+#switch-button:checked ~ .switch-button-label::before{
     content: "ON";
     left: 2.5rem;
     color: red;
 }
 
 .main-status{
-    background-color: rgba(0, 0, 0, .5);
-    color: black;
     grid-area: main-status;
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: rgba(0, 0, 0, .5);
     border: 1px solid rgba(0, 200, 255, 1);
     border-radius: 2rem;
     box-shadow: 0 0 0.5rem rgba(0, 200, 255, 1);
 }
 
 .zone-status{
-    background-color: rgba(0, 0, 0, .5);
-    color: black;
     grid-area: zone-status;
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: rgba(0, 0, 0, .5);
     border: 1px solid rgba(0, 200, 255, 1);
     border-radius: 2rem;
     box-shadow: 0 0 0.5rem rgba(0, 200, 255, 1);
@@ -280,39 +264,37 @@ input{
 /* lights section wrapper */
 .lights-wrapper{
     grid-area: lights-wrapper;
-    padding: 0;
     display: grid;
+    gap: .5rem;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr;
-    gap: 1rem;
     grid-template-areas: 
         "tv-led" 
         "lamp-led";
 }
 
 .tv-led{
-    background-color: rgba(0, 0, 0, .5);
-    color: black;
     grid-area: tv-led;
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: rgba(0, 0, 0, .5);
     border: 1px solid rgba(0, 200, 255, 1);
     border-radius: 2rem;
     box-shadow: 0 0 0.5rem rgba(0, 200, 255, 1);
 }
 
 .lamp-led{
-    background-color: rgba(0, 0, 0, .5);
-    color: black;
     grid-area: lamp-led;
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: rgba(0, 0, 0, .5);
     border: 1px solid rgba(0, 200, 255, 1);
     border-radius: 2rem;
     box-shadow: 0 0 0.5rem rgba(0, 200, 255, 1);
 }
+
 
 footer{
     grid-area: footer;
@@ -328,25 +310,23 @@ footer{
         height: 100vh;
     }
 
-    body{
-        background: url("../images/iot_backround.jpg") center no-repeat;
-        background-size: cover;
-    }
-
     i{
         margin-right: 0rem;
         margin-bottom: 1rem;
     }
 
+    .heading{
+        font-size: 3rem;
+    }
+
+    .exit-icon i{
+        margin-bottom: 0;
+    }
+
     /* Main section wrapper */
     .main-wrapper{
-        grid-area: main-wrapper;
-        padding: 0 1rem;
-        display: grid;
         grid-template-columns: 1fr;
-        grid-template-rows: 1fr 1fr 1fr;        
-        padding-bottom: 1rem;
-        /* gap: 1rem; */
+        grid-template-rows: 1fr 2fr 2fr;
         grid-template-areas: 
             "main-info"
             "alarm-wrapper"
@@ -354,108 +334,33 @@ footer{
     }
 
     .main-info{
-        grid-area: main-info;
-        display: grid;
         grid-template-columns: 1fr 1fr ;
         grid-template-rows: 1fr;
-        gap: 1rem;
         grid-template-areas: 
             "date-wrapper time-wrapper";
     }
 
     .date-wrapper{
-        grid-area: date-wrapper;
-        display: flex;
         flex-direction: column;
-        justify-content: center;
-        align-items: center;
     }
 
     .time-wrapper{
-        grid-area: time-wrapper;
-        display: flex;
         flex-direction: column;
-        justify-content: center;
-        align-items: center;
     }
 
     /* Alarm section wrapper */
     .alarm-wrapper{
-        grid-area: alarm-wrapper;
-        padding: 0;
-        display: grid;
         grid-template-columns: 1fr 1fr 1fr;
         grid-template-rows: 1fr;
-        gap: 1rem;
         grid-template-areas: 
             "armed-status main-status zone-status";
     }
 
-    .armed-status{
-        grid-area: armed-status;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: 1fr;
-        gap: 1rem;
-        grid-template-areas: 
-            "armed-status-label armed-status-button";
-    }
-    
-    .armed-status-label{
-        grid-area: armed-status-label;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    
-    .armed-status-button{
-        grid-area: armed-status-button;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .main-status{
-        grid-area: main-status;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: initial;
-    }
-
-    .zone-status{
-        grid-area: zone-status;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: initial;
-    }
-
     /* lights section wrapper */
     .lights-wrapper{
-        grid-area: lights-wrapper;
-        padding: 0;
-        display: grid;
         grid-template-columns: 1fr 1fr;
         grid-template-rows: 1fr;
-        gap: 1rem;
         grid-template-areas: 
             "tv-led lamp-led";
-    }
-
-    .tv-led{
-        grid-area: tv-led;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: initial;
-    }
-
-    .lamp-led{
-        grid-area: lamp-led;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: initial;
     }
 }
