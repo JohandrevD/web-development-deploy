@@ -33,11 +33,11 @@ class MySubscribeCallbackClass(SubscribeCallback):
 
 	def control_message(self, msg):
 		if(msg.publisher == 'Raspberry_Pi_Controller'):			
-			if(msg.access == 'Access'):
+			if(msg.message['access'] == 'Access'):
 				print('Someone accessed the page')
 			# 	self.pubnub.publish().channel(self.pubnubChannel).message('Access').sync()
 				mail_sender_cls.send_mail('IoT', 'Someone accessed the page')
-			elif(msg.access == 'No Access'):
+			elif(msg.message['access'] == 'No Access'):
 				print('Someone tried to accessed the page')
 			# 	self.pubnub.publish().channel(self.pubnubChannel).message('No Access').sync()
 				mail_sender_cls.send_mail('IoT', 'Someone tried to access the page')
