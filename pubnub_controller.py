@@ -4,6 +4,10 @@ from pubnub.callbacks import SubscribeCallback
 
 from threading import Thread
 
+from mail_sender import MailSenderCls
+
+mail_sender_cls = MailSenderCls()
+
 
 class MySubscribeCallbackClass(SubscribeCallback):
 
@@ -28,7 +32,15 @@ class MySubscribeCallbackClass(SubscribeCallback):
 				# mail_sender_cls.send_mail('Raspberry Pi', 'Connected')
 
 	def control_message(self, msg):
-		print(msg.message)
+		if(msg.publisher == 'Raspberry_Pi_Controller'):			
+			if(msg.access == 'Access'):
+				print('Someone accessed the page')
+			# 	self.pubnub.publish().channel(self.pubnubChannel).message('Access').sync()
+				mail_sender_cls.send_mail('IoT', 'Someone accessed the page')
+			elif(msg.access == 'No Access'):
+				print('Someone tried to accessed the page')
+			# 	self.pubnub.publish().channel(self.pubnubChannel).message('No Access').sync()
+				mail_sender_cls.send_mail('IoT', 'Someone tried to access the page')
 
 
 class PubNubControlClass(object):
