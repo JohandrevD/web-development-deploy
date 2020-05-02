@@ -1,3 +1,5 @@
+var arm_button = document.getElementById('armed-button');
+
 if(!!window.performance && window.performance.navigation.type === 2)
 {
     window.location.reload();
@@ -95,33 +97,72 @@ function controlPresence(p){
 
 function controlMessages(m){
     if(m.publisher == 'Raspberry_Pi_Controller'){
-        if(m.message['access'] == 'Access'){
-            document.querySelector('body').style.visibility = 'visible';
+        if('access' in m.message){
+            if(m.message['access'] == 'Access'){
+                document.querySelector('body').style.visibility = 'visible';
+            }
+            else if(m.message['access'] == 'No Access'){
+                alert('Incorrect password! Please try again.');
+                window.location.reload();
+                // window.location = window.location.href.split('/iot')[0];
+            }
         }
-        else if(m.message['access'] == 'No Access'){
-            alert('Incorrect password! Please try again.');
-            window.location.reload();
-            // window.location = window.location.href.split('/iot')[0];
+        if('response' in m.message){
+            console.log(m.message['response']['arm_response'])
+            if(m.message['response']['arm_response'] == 'Armed'){
+                arm_button.checked = true;
+            }
+            else{
+                arm_button.checked = false;
+            }
         }
     }
 };
 
-$('#arm_button').change(function(){
-    if($(this).is(':checked')) {
+request_variable();
+
+function request_variable(){
+    pubnub.publish({
+        message: {'request': 'alarm_request'},
+        channel: theChannel
+    });
+}
+
+function arm_button_function(){
+    if(arm_button.checked){
         console.log('Armed')
         pubnub.publish({
             message: {'alarm': 
-                        {'arm_status': 'arm'}},
-            channel: theChannel
-        });
-    } else {
-        console.log('Disarmed')
-        pubnub.publish({
-            message: {'alarm': 
-                        {'arm_status': 'disarm'}},
+                {'arm_status': 'arm'}},
             channel: theChannel
         });
     }
-});
+    else {
+        console.log('Disarmed')
+        pubnub.publish({
+            message: {'alarm': 
+                {'arm_status': 'disarm'}},
+            channel: theChannel
+        });
+    }
+//     $('#arm_button').change(function(){
+//         if($(this).is(':checked')) {
+//             console.log('Armed')
+//             pubnub.publish({
+//                 message: {'alarm': 
+//                             {'arm_status': 'arm'}},
+//                 channel: theChannel
+//             });
+//         } else {
+//             console.log('Disarmed')
+//             pubnub.publish({
+//                 message: {'alarm': 
+//                             {'arm_status': 'disarm'}},
+//                 channel: theChannel
+//             });
+//         }
+//     });
+}
+
 
 // ----- PubNub control starts here ----- //
