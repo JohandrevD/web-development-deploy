@@ -107,6 +107,17 @@ function controlMessages(m){
                 // window.location = window.location.href.split('/iot')[0];
             }
         }
+        if('alarm' in m.message){
+            console.log("test")
+            if('arm_status' in m.message['alarm']){
+                if(m.message['alarm']['arm_status'] == 'arm'){
+                    arm_button.checked = true;
+                }
+                else if(m.message['alarm']['arm_status'] == 'disarm'){
+                    arm_button.checked = false;
+                }
+            }
+        }
         if('response' in m.message){
             console.log(m.message['response']['arm_response'])
             if(m.message['response']['arm_response'] == 'Armed'){
