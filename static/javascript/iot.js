@@ -109,8 +109,18 @@ function controlMessages(m){
 $('#arm_button').change(function(){
     if($(this).is(':checked')) {
         console.log('Armed')
+        pubnub.publish({
+            message: {'alarm': 
+                        {'arm_status': 'arm'}},
+            channel: theChannel
+        });
     } else {
         console.log('Disarmed')
+        pubnub.publish({
+            message: {'alarm': 
+                        {'arm_status': 'disarm'}},
+            channel: theChannel
+        });
     }
 });
 
